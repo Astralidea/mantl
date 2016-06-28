@@ -89,6 +89,6 @@ done
 # Make private keys only readable by root
 keys=("server.key" "kubelet.key" "kubecfg.key")
 for key in "${keys[@]}"; do
-  sudo chown root:root "${cert_dir}/${key}"
+  chown root:root "${cert_dir}/${key}"
   chmod 0660 "${cert_dir}/${key}"
 done
