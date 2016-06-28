@@ -81,12 +81,14 @@ cp -p pki/issued/kubelet.crt "${cert_dir}/kubelet.crt"
 cp -p pki/private/kubelet.key "${cert_dir}/kubelet.key"
 
 # Make public certificates readable by everyone
-for cert in "${cert_dir}/*.crt"; do
+certs=("ca.crt" "server.crt" "kubelet.crt" "kubecfg.crt")
+for cert in "${certs[@]}"; do
   chmod 0664 "${cert_dir}/${cert}"
 done
 
 # Make private keys only readable by root
-for key in "${cert_dir}/*.key"; do
+keys=("server.key" "kubelet.key" "kubecfg.key")
+for key in "${keys[@]}"; do
   sudo chown root:root "${cert_dir}/${key}"
   chmod 0660 "${cert_dir}/${key}"
 done"
